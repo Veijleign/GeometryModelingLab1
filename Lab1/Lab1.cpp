@@ -79,16 +79,23 @@ int main(int argc, char** argv)
             ImGui_ImplSDL2_NewFrame();
             ImGui::NewFrame();
 
+            static float color_float[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
             // Render Gui
             {
                 ImGui::Begin("Window");
-                float color_float[4] = { 0.0f, 0.0f, 0.0f, 0.0f };
+               
+
+                /*color_float[0] = (float)((*color >> ) & 0xFF) / 255.0f;
+                color_float[1] = (float)((*color >> 8) & 0xFF) / 255.0f;
+                color_float[2] = (float)((*color >> 16) & 0xFF) / 255.0f;*/
 
 
                 
                 if (ImGui::ColorEdit3("ColorEdit", (float*)&color_float, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_PickerHueWheel)) {
 
-                    ImU32 col32_no_alpha = ImGui::ColorConvertFloat4ToU32(ImVec4(color_float[3], color_float[2], color_float[1], color_float[0]));
+                    ImU32 col32_no_alpha = ImGui::ColorConvertFloat4ToU32(
+                        ImVec4(color_float[3], color_float[2], color_float[1],color_float[0]));
+
                     float a = (col32_no_alpha >> 24) & 255;
                     float r = (col32_no_alpha >> 16) & 255;
                     float g = (col32_no_alpha >> 8) & 255;
